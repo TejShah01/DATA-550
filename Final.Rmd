@@ -1,0 +1,46 @@
+---
+title: "F1 Driver Report"
+author: "Tej Shah"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, here_i_am, include=FALSE}
+here::i_am(
+  "Final.Rmd"
+)
+```
+
+## Introduction
+
+This report analyzes Formula 1 dataset stored in an Excel file. The dataset has 4 sheets which includes information about drivers, qualifying results for the race, lap times during a race and race results from 1950 to 2024. These variables allow analysis of driver performance beyond just how many championships/races they have won in Formula 1.
+
+The objective of this report is to examine driver performance trends in the modern era of Formula 1 (2008–2024). This will be done by summarizing which drivers perform best on average using finishing position, lap times, qualifying results and visualize the relationship between starting position and finishing position to understand how much starting position influences race outcomes.
+
+# Descriptive Analysis
+
+## Table: Average finishing position by driver
+
+```{r, Table, echo=FALSE}
+library(knitr)
+driver_table <- readr::read_csv(
+  here::here("output/driver_table.csv"),
+  show_col_types = FALSE
+)
+kable(
+  driver_table,
+  digits = 2,
+  col.names = c("Driver ID", "Races", "Average Finish", "Average Start"),
+  caption = "Top 10 driver IDs by average finishing position (minimum 50 races)"
+)
+```
+
+This table shows driver performance using average finishing position. Lower values indicate better performance because finishing position of 1 represents a race win. Drivers are identified by driverId. Restricting to drivers with at least 50 races ensures the results reflect consistent performance.
+
+``` {r, Figure, echo=FALSE}
+knitr::include_graphics(
+  here::here("output/top5_figure.png")
+)
+```
+
+This figure shows the relationship between starting position and finishing position for the top five drivers identified in the table. A flatter trend line indicates good performance because the driver’s finishing position does not worsen significantly as their starting position becomes worse. In contrast, a steeper upward line indicates bad performance, meaning the driver’s finishing position is more strongly affected by their starting position. Therefore, drivers with flatter lines demonstrate more consistent performance regardless of where they start.
