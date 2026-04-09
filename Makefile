@@ -7,3 +7,7 @@ Final.html: Final.Rmd code/03_RenderReport.R .analysis
 .PHONY: clean
 clean:
 	rm -f output/* && rm -f Final.html && rm -f .analysis
+	
+.PHONY: install
+install:
+	Rscript -e "renv::restore(prompt = FALSE)"
