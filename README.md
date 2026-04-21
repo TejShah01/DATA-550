@@ -1,4 +1,4 @@
-To generate the final report, type `make` in the terminal, 
+To generate the final report, enter `make docker` in the terminal, 
 
 ## Report contents
 
@@ -36,11 +36,12 @@ The final report includes:
 
 - contains rules for building the report
 - running `make` will create the table output, figure output, and render the final HTML report
+- running `make install` will restore the package environment using `renv`
+- running `make docker` will create the report in the mounted `Final_Report/` folder using Docker
 
-## Package environment
+`Dockerfile`
 
-This project uses `renv` to manage package versions.
-
-To restore the package environment for this project, run in bash:
-
-make install
+- defines the container environment used to run the project
+- starts from a base R image and installs required system dependencies like pandoc
+- copies the project files and renv configuration into the container including restoring the R package environment
+- Makes the final report when `make docker` is run in terminal and saves it to the mounted `Final_Report/` folder

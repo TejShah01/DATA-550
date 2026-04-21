@@ -6,8 +6,14 @@ Final.html: Final.Rmd code/03_RenderReport.R .analysis
 	
 .PHONY: clean
 clean:
-	rm -f output/* && rm -f Final.html && rm -f .analysis
+	rm -f output/* && rm -f Final_Report/Final.html && rm -f .analysis
 	
 .PHONY: install
 install:
 	Rscript -e "renv::restore(prompt = FALSE)"
+	
+.PHONY: docker
+docker:
+	mkdir -p Final_Report
+	docker run -v "$$(pwd)/Final_Report":/Project/Final_Report final_data550
+	
