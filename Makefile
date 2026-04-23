@@ -15,5 +15,5 @@ install:
 .PHONY: docker
 docker:
 	mkdir -p Final_Report
-	docker run -v "$$(pwd)/Final_Report":/Project/Final_Report final_data550
+	docker run -v "$$(pwd)/Final_Report":/Project/Final_Report tejshah01/final_data550:latest
 	
